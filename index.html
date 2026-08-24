@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Project Catalogue</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+/* ============================================================
+   EDIT YOUR PROJECTS HERE — scroll down to <script> at bottom.
+   Everything below is styling. You don't need to touch it.
+   ============================================================ */
+
+:root{
+  --graphite-950:#0e1113;
+  --graphite-900:#14181b;
+  --graphite-800:#1c2124;
+  --graphite-700:#282e32;
+  --graphite-600:#3a4247;
+  --paper:#eeece4;
+  --paper-dim:#b9b6ab;
+  --brass:#c9a24b;
+  --brass-bright:#e6c778;
+  --stamp-red:#9a3324;
+  --line:#3a4247;
+  --radius:2px;
+  --serif-display:'Space Grotesk', sans-serif;
+  --mono:'IBM Plex Mono', monospace;
+  --sans:'Inter', sans-serif;
+}
+
+*{box-sizing:border-box; margin:0; padding:0;}
+
+html{scroll-behavior:smooth;}
+
+body{
+  background:
+    radial-gradient(ellipse 1200px 600px at 50% -10%, rgba(201,162,75,0.08), transparent 60%),
+    var(--graphite-950);
+  color:var(--paper);
+  font-family:var(--sans);
+  min-height:100vh;
+  background-image:
+    radial-gradient(ellipse 1200px 600px at 50% -10%, rgba(201,162,75,0.08), transparent 60%),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 3px);
+}
+
+a{color:inherit;}
+
+/* ---------- Header ---------- */
+
+header{
+  padding:64px 32px 40px;
+  max-width:1200px;
+  margin:0 auto;
+  border-bottom:1px solid var(--line);
+}
+
+.kicker{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--brass);
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:18px;
+}
+
+.kicker::before{
+  content:"";
+  width:22px;
+  height:1px;
+  background:var(--brass);
+}
+
+h1{
+  font-family:var(--serif-display);
+  font-weight:600;
+  font-size:clamp(34px, 5.5vw, 58px);
+  letter-spacing:-0.01em;
+  line-height:1.05;
+  color:var(--paper);
+  max-width:16ch;
+}
+
+.subhead{
+  margin-top:18px;
+  font-size:15px;
+  color:var(--paper-dim);
+  max-width:56ch;
+  line-height:1.6;
+}
+
+.meta-row{
+  margin-top:36px;
+  display:flex;
+  gap:32px;
+  flex-wrap:wrap;
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--paper-dim);
+}
+
+.meta-row span b{
+  color:var(--paper);
+  font-weight:500;
+}
+
+/* ---------- Catalogue grid ---------- */
+
+main{
+  max-width:1200px;
+  margin:0 auto;
+  padding:56px 32px 100px;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(340px, 1fr));
+  gap:28px;
+}
+
+/* ---------- Card ---------- */
+
+.card{
+  position:relative;
+  background:var(--graphite-900);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  transition:border-color .25s ease, transform .25s ease;
+}
+
+.card:hover{
+  border-color:var(--graphite-600);
+  transform:translateY(-2px);
+}
+
+.card:focus-within{
+  outline:2px solid var(--brass);
+  outline-offset:2px;
+}
+
+.card-id{
+  position:absolute;
+  top:14px;
+  right:14px;
+  z-index:3;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.08em;
+  color:var(--graphite-950);
+  background:var(--brass);
+  padding:3px 9px;
+  border-radius:1px;
+  transform:rotate(2deg);
+  box-shadow:0 2px 6px rgba(0,0,0,0.3);
+}
+
+.card-media{
+  position:relative;
+  aspect-ratio:16/10;
+  background:
+    linear-gradient(135deg, var(--graphite-800), var(--graphite-700));
+  overflow:hidden;
+  border-bottom:1px solid var(--line);
+}
+
+.card-media img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .5s ease;
+}
+
+.card:hover .card-media img{
+  transform:scale(1.04);
+}
+
+.media-placeholder{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+  color:var(--graphite-600);
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:0.06em;
+  text-align:center;
+  padding:20px;
+  background-image:
+    linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%),
+    linear-gradient(45deg, rgba(255,255,255,0.02) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.02) 75%);
+  background-size:16px 16px;
+  background-position:0 0, 8px 8px;
+}
+
+.media-placeholder svg{opacity:0.5;}
+
+.card-body{
+  padding:22px 22px 20px;
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  flex:1;
+}
+
+.card-title{
+  font-family:var(--serif-display);
+  font-size:20px;
+  font-weight:600;
+  letter-spacing:-0.005em;
+  color:var(--paper);
+}
+
+.card-desc{
+  font-size:13.5px;
+  line-height:1.6;
+  color:var(--paper-dim);
+}
+
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:2px;
+}
+
+.tag{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:0.03em;
+  color:var(--paper-dim);
+  border:1px solid var(--line);
+  padding:3px 8px;
+  border-radius:20px;
+}
+
+/* ---------- Field ledger (dotted leader lines) ---------- */
+
+.fields{
+  margin-top:auto;
+  padding-top:14px;
+  border-top:1px dashed var(--line);
+  display:flex;
+  flex-direction:column;
+  gap:0;
+}
+
+.field-link{
+  display:flex;
+  align-items:baseline;
+  gap:6px;
+  padding:9px 0;
+  text-decoration:none;
+  border-bottom:1px solid transparent;
+}
+
+.field-link:not(:last-child){
+  border-bottom:1px solid var(--graphite-800);
+}
+
+.field-label{
+  font-family:var(--mono);
+  font-size:10.5px;
+  letter-spacing:0.1em;
+  text-transform:uppercase;
+  color:var(--paper-dim);
+  white-space:nowrap;
+  flex-shrink:0;
+}
+
+.field-leader{
+  flex:1;
+  border-bottom:1px dotted var(--graphite-600);
+  transform:translateY(-3px);
+  min-width:12px;
+}
+
+.field-value{
+  font-family:var(--mono);
+  font-size:12px;
+  color:var(--paper);
+  white-space:nowrap;
+  display:flex;
+  align-items:center;
+  gap:5px;
+  transition:color .2s ease;
+}
+
+.field-link:hover .field-value{
+  color:var(--brass-bright);
+}
+
+.field-link:hover .field-label{
+  color:var(--brass);
+}
+
+.field-value svg{
+  width:11px;
+  height:11px;
+  opacity:0.7;
+}
+
+.field-link.disabled{
+  opacity:0.4;
+  pointer-events:none;
+}
+
+/* ---------- Footer ---------- */
+
+footer{
+  border-top:1px solid var(--line);
+  padding:28px 32px 40px;
+  max-width:1200px;
+  margin:0 auto;
+  font-family:var(--mono);
+  font-size:11px;
+  color:var(--graphite-600);
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:8px;
+}
+
+/* ---------- Motion / accessibility ---------- */
+
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important;}
+  html{scroll-behavior:auto;}
+}
+
+@media (max-width:520px){
+  header{padding:48px 20px 32px;}
+  main{padding:40px 20px 80px;}
+  .grid{grid-template-columns:1fr;}
+  .meta-row{gap:20px;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="kicker">Archive · Client Delivery</div>
+  <h1 id="pageTitle">Project Catalogue</h1>
+  <p class="subhead" id="pageSubhead">
+    A working index of delivered systems — each entry links to its live spreadsheet and deployed application.
+  </p>
+  <div class="meta-row">
+    <span>Compiled by <b id="authorName">Shahzaib</b></span>
+    <span>Entries <b id="entryCount">—</b></span>
+    <span>Updated <b id="updatedDate">—</b></span>
+  </div>
+</header>
+
+<main>
+  <div class="grid" id="grid"></div>
+</main>
+
+<footer>
+  <span>Catalogue generated locally</span>
+  <span id="footerDate"></span>
+</footer>
+
+<script>
+/* ============================================================
+   EDIT YOUR PROJECTS BELOW.
+   - image: path to a file in ./images/ (or leave "" for a placeholder)
+   - sheetUrl / appUrl: leave "" to show a greyed-out "not applicable" row
+   - tags: short tech/keyword labels, as many or few as you like
+   ============================================================ */
+
+const AUTHOR = "Shahzaib";
+
+const PROJECTS = [
+  {
+    title: "ATS — Sales Log",
+    description: "Employee sales tracking and commission dashboard for the ATS workflow.",
+    image: "images/ats-sales-log.png",
+    sheetUrl: "",
+    appUrl: "",
+    tags: ["Sales", "Commissions", "Dashboard"]
+  },
+  {
+    title: "Bellefair — Access Dashboard",
+    description: "Restricted access experience with a branded dashboard state and member messaging.",
+    image: "images/bellefair-access-dashboard.png",
+    sheetUrl: "",
+    appUrl: "",
+    tags: ["Access", "Dashboard", "Branding"]
+  },
+  {
+    title: "Better Homes — Investment Strategy",
+    description: "Property investment strategy selector with cost inputs and decision-focused form layout.",
+    image: "images/better-homes-investment-strategy.png",
+    sheetUrl: "",
+    appUrl: "",
+    tags: ["Property", "Strategy", "Calculator"]
+  },
+  {
+    title: "Construction Cost & Commission Calculator",
+    description: "Roofing estimate tool for job costing, property details, and total cost breakdowns.",
+    image: "images/apollo-roofing-calculator.png",
+    sheetUrl: "",
+    appUrl: "",
+    tags: ["Estimator", "Roofing", "Costing"]
+  }
+];
+
+/* ============================================================
+   Rendering — no need to edit below this line.
+   ============================================================ */
+
+function pad(n){ return String(n).padStart(2, "0"); }
+
+function externalIcon(){
+  return `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><path d="M15 3h6v6"/><path d="M10 14 21 3"/></svg>`;
+}
+
+function placeholderSvg(){
+  return `<svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="3" width="18" height="18" rx="1"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>`;
+}
+
+function fieldRow(label, url, kind){
+  const has = url && url.trim().length > 0;
+  const display = has ? "Open ↗" : "Not applicable";
+  return `
+    <a class="field-link ${has ? "" : "disabled"}" href="${has ? url : "#"}" target="${has ? "_blank" : "_self"}" rel="noopener">
+      <span class="field-label">${label}</span>
+      <span class="field-leader"></span>
+      <span class="field-value">${display}${has ? externalIcon() : ""}</span>
+    </a>`;
+}
+
+function renderCard(p, i){
+  const idTag = `CAT-${pad(i + 1)}`;
+  const media = p.image
+    ? `<img src="${p.image}" alt="${p.title}" loading="lazy" onerror="this.parentElement.innerHTML='<div class=\\'media-placeholder\\'>${placeholderSvg()}<span>Image missing<br>${p.image}</span></div>'">`
+    : `<div class="media-placeholder">${placeholderSvg()}<span>Add image to<br>${`images/`}</span></div>`;
+
+  const tags = (p.tags || []).map(t => `<span class="tag">${t}</span>`).join("");
+
+  return `
+  <article class="card">
+    <span class="card-id">${idTag}</span>
+    <div class="card-media">${media}</div>
+    <div class="card-body">
+      <h2 class="card-title">${p.title}</h2>
+      <p class="card-desc">${p.description || ""}</p>
+      ${tags ? `<div class="tags">${tags}</div>` : ""}
+      <div class="fields">
+        ${fieldRow("Spreadsheet", p.sheetUrl, "sheet")}
+        ${fieldRow("Web App", p.appUrl, "app")}
+      </div>
+    </div>
+  </article>`;
+}
+
+function render(){
+  document.getElementById("authorName").textContent = AUTHOR;
+  document.getElementById("entryCount").textContent = pad(PROJECTS.length);
+  const now = new Date();
+  const dateStr = now.toLocaleDateString(undefined, { year: "numeric", month: "short", day: "2-digit" });
+  document.getElementById("updatedDate").textContent = dateStr;
+  document.getElementById("footerDate").textContent = dateStr;
+  document.getElementById("grid").innerHTML = PROJECTS.map(renderCard).join("");
+}
+
+render();
+</script>
+
+</body>
+</html>
